@@ -40,6 +40,34 @@ TEST({suite}, Placeholder) {{
 }}
 """
 
+README_TMPL = """\
+<!-- Copyright (C) Denys Valchuk - All Rights Reserved
+     ZHZhbGNodWtAZ21haWwuY29tCg== -->
+
+# {id} — {title}
+
+**URL:** https://leetcode.com/problems/{slug}/
+**Difficulty:**
+**Topics:**
+
+## Problem Statement
+
+<!-- paste or expand here -->
+
+## Constraints
+
+<!-- list constraints -->
+
+## Examples
+
+<!-- input → output → explanation -->
+
+## Complexity Targets
+
+- Time: O(?)
+- Space: O(?)
+"""
+
 
 def main(argv):
     if len(argv) != 3:
@@ -65,14 +93,17 @@ def main(argv):
 
     guard = "DV_LC_{}_{}_HPP".format(pid, slug.upper().replace("-", "_"))
     suite = "".join(part.capitalize() for part in slug.split("-"))
+    title = " ".join(part.capitalize() for part in slug.split("-"))
 
     (folder / "solution.hpp").write_text(
         SOLUTION_TMPL.format(guard=guard, id=pid, slug=slug), encoding="utf-8")
     (folder / "test.cpp").write_text(
         TEST_TMPL.format(suite=suite, id=pid, slug=slug), encoding="utf-8")
+    (folder / "README.md").write_text(
+        README_TMPL.format(id=pid, slug=slug, title=title), encoding="utf-8")
 
     print(f"created {folder}")
-    print("next: cmake --preset conan-default  # pick up the new folder")
+    print("next: fill in README.md, then  cmake --preset conan-default  # pick up the new folder")
     return 0
 
 
