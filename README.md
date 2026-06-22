@@ -54,4 +54,4 @@ python scripts/new_problem.py 0042 trapping-rain-water
 
 >📝
 > Conventions (layout, formatting, Conan recipe) follow the template
-> https://github.com/valden/cpptest
+> https://github.com/edu-one/cpptest

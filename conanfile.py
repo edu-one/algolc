@@ -13,7 +13,7 @@ class AlgoConan(ConanFile):
     license = "MIT"
 
     author = "Denys Valchuk <ZHZhbGNodWtAZ21haWwuY29tCg==>"
-    url = "https://github.com/valden/algolc"
+    url = "https://github.com/edu-one/algolc"
     description = "LeetCode solutions playground"
     topics = ("leetcode", "algolc", "playground")
 
