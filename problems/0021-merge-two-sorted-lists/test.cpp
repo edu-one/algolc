@@ -57,3 +57,10 @@ TEST(MergeTwoLists, OneEmpty) {
     EXPECT_EQ((std::vector<int>{0}), to_vector(merged));
     free_list(merged);
 }
+
+TEST(MergeTwoLists, OneEmptyLeft) {
+    dv::lc::Solution s;
+    dv::lc::ListNode *merged = s.mergeTwoLists(make_list({0}), nullptr);
+    EXPECT_EQ((std::vector<int>{0}), to_vector(merged));
+    free_list(merged);
+}

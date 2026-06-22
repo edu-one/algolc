@@ -18,10 +18,10 @@ SOLUTION_TMPL = HEADER + """
 
 namespace dv::lc {{
 
-class Solution {{
-  public:
-    // TODO: solve {id} - {slug}
-}};
+    class Solution {{
+    public:
+        // TODO: solve {id} - {slug}
+    }};
 
 }} // namespace dv::lc
 

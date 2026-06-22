@@ -1,2 +1,4 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
 conan>=2,<3
 cmake>=3.23

@@ -19,7 +19,7 @@ if(WITH_TESTS)
   list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
   enable_testing()
 
-  find_package(GTest)
+  find_package(GTest REQUIRED)
   include(GoogleTest)
 
   file(GLOB problem_dirs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/problems
