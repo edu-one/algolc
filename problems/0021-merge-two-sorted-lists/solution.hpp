@@ -2,8 +2,8 @@
  * ZHZhbGNodWtAZ21haWwuY29tCg==
  */
 
-#ifndef __DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP__
-#define __DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP__
+#ifndef DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP
+#define DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP
 
 #include <dv/lc.hpp>
 
@@ -31,4 +31,4 @@ namespace dv::lc {
 
 } // namespace dv::lc
 
-#endif // __DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP__
+#endif // DV_LC_0021_MERGE_TWO_SORTED_LISTS_HPP

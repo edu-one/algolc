@@ -63,7 +63,7 @@ def main(argv):
         return 1
     folder.mkdir(parents=True)
 
-    guard = "__DV_LC_{}_{}_HPP__".format(pid, slug.upper().replace("-", "_"))
+    guard = "DV_LC_{}_{}_HPP".format(pid, slug.upper().replace("-", "_"))
     suite = "".join(part.capitalize() for part in slug.split("-"))
 
     (folder / "solution.hpp").write_text(

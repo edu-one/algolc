@@ -2,8 +2,8 @@
  * ZHZhbGNodWtAZ21haWwuY29tCg==
  */
 
-#ifndef __DV_LC_0001_TWO_SUM_HPP__
-#define __DV_LC_0001_TWO_SUM_HPP__
+#ifndef DV_LC_0001_TWO_SUM_HPP
+#define DV_LC_0001_TWO_SUM_HPP
 
 #include <unordered_map>
 #include <vector>
@@ -26,4 +26,4 @@ namespace dv::lc {
 
 } // namespace dv::lc
 
-#endif // __DV_LC_0001_TWO_SUM_HPP__
+#endif // DV_LC_0001_TWO_SUM_HPP

@@ -2,8 +2,8 @@
  * ZHZhbGNodWtAZ21haWwuY29tCg==
  */
 
-#ifndef __DV_INCLUDE_LC_HPP__
-#define __DV_INCLUDE_LC_HPP__
+#ifndef DV_INCLUDE_LC_HPP
+#define DV_INCLUDE_LC_HPP
 
 namespace dv::lc {
 
@@ -18,4 +18,4 @@ namespace dv::lc {
 
 } // namespace dv::lc
 
-#endif // __DV_INCLUDE_LC_HPP__
+#endif // DV_INCLUDE_LC_HPP
