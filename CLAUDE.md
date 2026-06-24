@@ -21,6 +21,8 @@ The authoritative text is in `scripts/new_problem.py` (`HEADER`). Copy it verbat
 
 **Formatting:** `.clang-format` governs C++; `.cmake-format` governs CMake. Run `clang-format` on every C++ file you touch.
 
+**Line endings:** LF only (`\n`). Never write CRLF (`\r\n`). This applies to every file you create or edit — C++, CMake, Python, Markdown, etc. When using the Write tool, ensure the content uses LF line endings.
+
 **Shared helpers:** `common/include/dv/lc.hpp`, included as `<dv/lc.hpp>`. Currently provides `ListNode`. Prefer helpers from there over reinventing them in test files.
 
 **Test style:** suite name = PascalCase slug (`MergeTwoLists`), helper functions in an anonymous namespace. See `problems/0021-merge-two-sorted-lists/test.cpp` for the canonical example.
