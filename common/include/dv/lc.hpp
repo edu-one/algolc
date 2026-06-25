@@ -16,6 +16,16 @@ namespace dv::lc {
         ListNode(int x, ListNode *next) : val{x}, next{next} {}
     };
 
+    // Binary tree node used by many tree problems.
+    struct TreeNode {
+        int val;
+        TreeNode *left;
+        TreeNode *right;
+        TreeNode() : val{0}, left{nullptr}, right{nullptr} {}
+        explicit TreeNode(int x) : val{x}, left{nullptr}, right{nullptr} {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : val{x}, left{left}, right{right} {}
+    };
+
 } // namespace dv::lc
 
 #endif // DV_INCLUDE_LC_HPP
