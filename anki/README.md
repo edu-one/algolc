@@ -1,3 +1,7 @@
+---
+noteId: 1782406075374
+---
+
 # Anki cards (yanki format)
 
 Cards here are managed by [yanki](https://github.com/nicholasgasior/yanki) and synced to Anki via the Anki-Connect plugin.
@@ -59,8 +63,7 @@ Definition or explanation.
 ## Syncing to Anki
 
 1. Install [Anki](https://apps.ankiweb.net/) and the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on.
-2. Install yanki: `pip install yanki`.
-3. Run from the repo root:
-   ```bash
-   yanki sync anki/
-   ```
+2. Open this repo as an [Obsidian](https://obsidian.md/) vault.
+3. Install the **Yanki** plugin (Community Plugins → search "Yanki").
+4. In the Yanki plugin settings, set the sync folder to `anki/`.
+5. Run **Yanki: Sync** from the Obsidian command palette to push all cards to Anki.
