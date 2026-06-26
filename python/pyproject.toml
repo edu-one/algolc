@@ -3,6 +3,7 @@
 
 [tool.pytest.ini_options]
 testpaths = ["problems"]
+addopts = "--import-mode=importlib"
 
 [tool.ruff]
 target-version = "py311"
