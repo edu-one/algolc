@@ -7,6 +7,16 @@
 build/
 CMakeUserPresets.json
 
+# Rust build artifacts
+rust/target/
+
+# Python bytecode and tool caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db
