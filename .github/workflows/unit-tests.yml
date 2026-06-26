@@ -11,29 +11,19 @@ on:
 jobs:
 
   cpp:
-    runs-on: self-hosted
-    container:
-      image: ubuntu:22.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: cpp
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install essential packages for C++ development
-        run: apt-get update -qq && apt-get install -y build-essential
-
-      - name: Install python3
-        shell: bash
-        run: |
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          apt-get install -y python3 python3-pip
-
       - name: Install conan and cmake
-        run: pip3 install -q --user conan==2.* cmake==3.23.*
+        run: |
+          pip3 install -q --user conan==2.* cmake==3.23.*
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Detect default conan profile if not exists
-        shell: bash
         run: '[ -f "$HOME/.conan2/profiles/default" ] || conan profile detect'
 
       - name: Install dependencies
@@ -49,36 +39,23 @@ jobs:
         run: ctest --preset conan-release --output-on-failure
 
   rust:
-    runs-on: self-hosted
-    container:
-      image: ubuntu:22.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: rust
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Rust toolchain
-        run: |
-          apt-get update -qq && apt-get install -y curl
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-
       - name: Run tests
         run: cargo test
 
   python:
-    runs-on: self-hosted
-    container:
-      image: ubuntu:22.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: python
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install python3
-        run: apt-get update -qq && apt-get install -y python3 python3-pip
 
       - name: Install test dependencies
         run: pip3 install pytest ruff
