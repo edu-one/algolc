@@ -10,6 +10,7 @@ CMakeUserPresets.json
 
 # Rust build artifacts
 rust/target/
+rust/Cargo.lock
 
 # Python bytecode and tool caches
 __pycache__/
