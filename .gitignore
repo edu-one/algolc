@@ -6,6 +6,7 @@
 !.vscode/launch.json
 build/
 CMakeUserPresets.json
+.claude/
 
 # Rust build artifacts
 rust/target/
