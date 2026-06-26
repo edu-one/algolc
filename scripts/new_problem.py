@@ -105,8 +105,6 @@ PYTHON_SOLUTION_TMPL = """\
 # Copyright (C) Denys Valchuk - All Rights Reserved
 # ZHZhbGNodWtAZ21haWwuY29tCg==
 
-from typing import List
-
 
 class Solution:
     # TODO: solve {id} - {slug}

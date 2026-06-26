@@ -30,6 +30,9 @@ python scripts/new_problem.py 0042 trapping-rain-water --rust --python
 
 ### C++ (from `cpp/`)
 ```bash
+# Install Conan + CMake (once):
+pip install -r requirements.txt
+
 conan install . --build=missing
 cmake --preset conan-default
 cmake --build --preset conan-release
