@@ -1,36 +1,112 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
+
 # Claude instructions for `algolc`
 
-## Project conventions
+## Project layout
 
-**Stack:** C++20 · Conan 2 · CMake ≥ 3.23 presets · GoogleTest 1.14 (`gtest::gtest`) · CTest.
+```
+algolc/
+  problems/<id>-<slug>/README.md   ← shared problem statement (browsable reference)
+  cpp/
+    CMakeLists.txt  conanfile.py  .clang-format  .cmake-format
+    common/include/dv/lc.hpp
+    problems/<id>-<slug>/{solution.hpp, test.cpp}
+  rust/
+    Cargo.toml (workspace)  rust-toolchain.toml  rustfmt.toml
+    problems/<id>-<slug>/{Cargo.toml, src/lib.rs}
+  python/
+    pyproject.toml (pytest + ruff)
+    problems/<id>-<slug>/{solution.py, test_solution.py, conftest.py}
+  scripts/new_problem.py   ← polyglot scaffold (opt-in per language)
+  anki/                    ← language-agnostic Anki cards
+```
 
-**Layout:** `problems/<id>-<slug>/` — each problem is a self-contained folder with exactly two source files: `solution.hpp` (header-only) and `test.cpp`. No build-system edits are needed when a new folder appears; CMake auto-discovers it via `file(GLOB ...)`.
+Auto-discovery is preserved for all three languages:
+- C++: `file(GLOB ...)` in `cpp/CMakeLists.txt`
+- Rust: workspace `members = ["problems/*"]` in `rust/Cargo.toml`
+- Python: pytest recursive `test_*.py` discovery from `python/`
 
-**Namespace:** `dv::lc` — every solution lives inside `namespace dv::lc { ... }`.
+---
 
-**Header guards:** `DV_LC_<ID>_<SLUG>_HPP` — uppercase, no leading underscores.  
-Example: `0042-trapping-rain-water` → `DV_LC_0042_TRAPPING_RAIN_WATER_HPP`.
+## Shared conventions
 
-**Copyright header:** every C++/CMake/Python file starts with the canonical block.  
-The authoritative text is in `scripts/new_problem.py` (`HEADER`). Copy it verbatim — do not retype or paraphrase:
+**Copyright header:** every source file (C++, CMake, Python, YAML, TOML) starts with the
+canonical block. The authoritative text is in `scripts/new_problem.py` (`HEADER`).
+Do not retype — copy verbatim:
 ```
 /* Copyright (C) Denys Valchuk - All Rights Reserved
  * ZHZhbGNodWtAZ21haWwuY29tCg==
  */
 ```
+For Python/TOML/YAML, use `#` comment style instead of `/* */`.
 
-**Formatting:** `.clang-format` governs C++; `.cmake-format` governs CMake. Run `clang-format` on every C++ file you touch.
+**Line endings:** LF only (`\n`). Never write CRLF. Applies to every file.
 
-**Line endings:** LF only (`\n`). Never write CRLF (`\r\n`). This applies to every file you create or edit — C++, CMake, Python, Markdown, etc. When using the Write tool, ensure the content uses LF line endings.
+---
 
-**Shared helpers:** `common/include/dv/lc.hpp`, included as `<dv/lc.hpp>`. Currently provides `ListNode`. Prefer helpers from there over reinventing them in test files.
+## C++ conventions
 
-**Test style:** suite name = PascalCase slug (`MergeTwoLists`), helper functions in an anonymous namespace. See `problems/0021-merge-two-sorted-lists/test.cpp` for the canonical example.
+**Stack:** C++20 · Conan 2 · CMake ≥ 3.23 presets · GoogleTest 1.14 (`gtest::gtest`) · CTest.
+
+**Namespace:** `dv::lc` — every solution lives inside `namespace dv::lc { ... }`.
+
+**Header guards:** `DV_LC_<ID>_<SLUG>_HPP` — uppercase, no leading underscores.
+Example: `0042-trapping-rain-water` → `DV_LC_0042_TRAPPING_RAIN_WATER_HPP`.
+
+**Shared helpers:** `cpp/common/include/dv/lc.hpp`, included as `<dv/lc.hpp>`. Currently
+provides `ListNode`. Prefer helpers from there over reinventing them in test files.
+
+**Test style:** suite name = PascalCase slug (`MergeTwoLists`), helper functions in an
+anonymous namespace. See `cpp/problems/0021-merge-two-sorted-lists/test.cpp` for the canonical example.
+
+**Formatting:** `.clang-format` governs C++; `.cmake-format` governs CMake. Run `clang-format`
+on every C++ file you touch.
+
+---
+
+## Rust conventions
+
+**Crate per problem:** each problem is an independent Cargo crate under `rust/problems/`.
+Crate package name: `p<id>-<slug>` (e.g., `p0042-trapping-rain-water`). The `p` prefix is
+required because Rust identifiers cannot start with a digit.
+
+**Solution structure:**
+```rust
+pub struct Solution;
+
+impl Solution {
+    pub fn method_name(...) -> ... {
+        // implementation
+    }
+}
+```
+
+**Tests:** inline in `src/lib.rs` under `#[cfg(test)] mod tests`. No separate test file.
+
+**Run:** `cd rust && cargo test` (whole workspace) or `cargo test -p p<id>-<slug>` (one problem).
+
+**Formatting:** `rustfmt` — run `rustfmt` on every Rust file you touch.
+
+---
+
+## Python conventions
+
+**Solution structure:** `class Solution` in `solution.py`. No imports beyond what the solution
+needs. Use `from typing import List` etc. as needed.
+
+**Tests:** `test_solution.py` using pytest. Import via `from solution import Solution`.
+Each problem directory contains a `conftest.py` that ensures the local `solution.py` is found.
+
+**Run:** `cd python && python -m pytest` (all problems) or `pytest problems/<id>-<slug>` (one problem).
+
+**Lint/format:** `ruff` — run `ruff check .` and `ruff format .` from `python/`.
 
 ---
 
 ## Build & test commands
 
+### C++ (run from `cpp/`)
 ```bash
 # Install dependencies (once, or after conanfile.py changes)
 conan install . --build=missing
@@ -47,7 +123,20 @@ cmake --build --preset conan-release
 ctest --preset conan-release
 ```
 
-Target name convention: `p_0042_trapping_rain_water` (underscores, not hyphens).
+Target name: `p_0042_trapping_rain_water` (underscores, not hyphens).
+
+### Rust (run from `rust/`)
+```bash
+cargo test                          # whole workspace
+cargo test -p p<id>-<slug>          # single problem
+```
+
+### Python (run from `python/`)
+```bash
+python -m pytest                    # all problems
+pytest problems/<id>-<slug>         # single problem
+ruff check .                        # lint
+```
 
 ---
 
@@ -55,17 +144,30 @@ Target name convention: `p_0042_trapping_rain_water` (underscores, not hyphens).
 
 When the user says "set up problem N" or equivalent:
 
-1. **Acquire the problem statement.**  
-   - If given a LeetCode URL, attempt `WebFetch`. If the fetch is thin or incomplete, ask the user to paste the statement.  
+1. **Acquire the problem statement.**
+   - If given a LeetCode URL, attempt `WebFetch`. If the fetch is thin or incomplete, ask the user to paste the statement.
    - If text is pasted directly, use it as-is.
 
 2. **Scaffold the folder:**
    ```bash
+   # C++ only (default):
    python scripts/new_problem.py <id> <slug>
-   cmake --preset conan-default
-   ```
 
-3. **Write `problems/<id>-<slug>/README.md`** — the browsable GitHub reference for this problem:
+   # C++ + Rust:
+   python scripts/new_problem.py <id> <slug> --rust
+
+   # C++ + Python:
+   python scripts/new_problem.py <id> <slug> --python
+
+   # All three:
+   python scripts/new_problem.py <id> <slug> --rust --python
+
+   # Add Rust to an existing problem (slug derived automatically):
+   python scripts/new_problem.py <id> --rust
+   ```
+   For C++: also run `cd cpp && cmake --preset conan-default` to pick up the new folder.
+
+3. **Write `problems/<id>-<slug>/README.md`** — the browsable GitHub reference:
    - Title + LeetCode URL
    - Difficulty (`Easy` / `Medium` / `Hard`)
    - Topics/tags (e.g., `Array`, `Hash Table`, `Two Pointers`)
@@ -74,15 +176,15 @@ When the user says "set up problem N" or equivalent:
    - Worked examples (input → output → explanation)
    - Target time and space complexity (derive from constraints; confirm with user if uncertain)
 
-4. **Replace the placeholder in `test.cpp`** with real GoogleTest cases:
-   - All examples from the problem statement.
-   - Edge cases derived from the constraints: empty inputs, min/max values, duplicates, single elements, all-equal arrays, etc.
-   - Follow the test style in `0021-merge-two-sorted-lists/test.cpp` (anonymous-namespace helpers, PascalCase suite name, `EXPECT_EQ` etc.).
-   - For large or reusable datasets, put them in a `dataset.hpp` in the problem folder and `#include` from the test; keep small cases inline.
+4. **Replace the placeholder tests** with real test cases:
+   - **C++** (`cpp/problems/<id>-<slug>/test.cpp`): GoogleTest cases, all examples + edge cases.
+     Follow the test style in `cpp/problems/0021-merge-two-sorted-lists/test.cpp`.
+   - **Rust** (`rust/problems/<id>-<slug>/src/lib.rs`): `#[cfg(test)]` block, mirror the C++ cases.
+   - **Python** (`python/problems/<id>-<slug>/test_solution.py`): pytest functions, mirror C++ cases.
 
-5. **Do not fill in `solution.hpp`.** Leave the stub (`// TODO: solve ...`) for the user to solve.
+5. **Do not fill in the solution.** Leave the TODO stub for the user to solve.
 
-6. **Benchmarks** — opt-in only. Google Benchmark is not a current Conan dependency; adding it is a separate change. Flag it and do it only if explicitly asked.
+6. **Benchmarks** — opt-in only. Flag it and do it only if explicitly asked.
 
 ---
 
@@ -97,7 +199,8 @@ When the user is working on a problem and asks for help:
   3. **Pseudocode + complexity** — outline the algorithm; state time/space complexity
   4. **Full solution** — only when the user explicitly says they want it
 
-Stay in the user's chosen language and idioms; reference repo conventions (namespace, guards) when relevant.
+Stay in the user's chosen language and idioms. For Rust: reference ownership, iterators,
+match patterns where relevant. For Python: reference list comprehensions, dicts, etc.
 
 ---
 
@@ -105,17 +208,17 @@ Stay in the user's chosen language and idioms; reference repo conventions (names
 
 When the user says they're done (or "review my solution"):
 
-1. Read `solution.hpp`.
-2. **Correctness** — trace through the provided examples and edge cases mentally; flag any case that would fail.
-3. **Complexity** — state time and space complexity; compare to the targets in `README.md`.
-4. **Conventions** — check namespace, header guard, copyright header, formatting.
-5. **Build + test** — run:
-   ```bash
-   cmake --build --preset conan-release --target p_<id>_<slug>
-   ctest --preset conan-release -R <id>
-   ```
+1. Read the solution file for the active language.
+2. **Correctness** — trace through provided examples and edge cases; flag failures.
+3. **Complexity** — state time and space complexity; compare to targets in `README.md`.
+4. **Conventions** — check language-specific conventions (namespace/guards for C++,
+   pub struct for Rust, class Solution for Python, copyright header, formatting).
+5. **Build + test** — run the appropriate command:
+   - C++: `cmake --build --preset conan-release --target p_<id>_<slug> && ctest --preset conan-release -R <id>`
+   - Rust: `cargo test -p p<id>-<slug>` (from `rust/`)
+   - Python: `pytest problems/<id>-<slug>` (from `python/`)
    Report results honestly; do not claim green if there are failures.
-6. **Follow-ups** — ask 2–3 interviewer-style questions: alternative approaches, scaling to larger inputs, trade-offs.
+6. **Follow-ups** — ask 2–3 interviewer-style questions.
 7. If knowledge gaps surface → Phase 4.
 
 ---
@@ -139,8 +242,8 @@ Two-sum complement lookup — what data structure and why?
 
 ---
 
-Hash map: store each value's index as you scan.  
-For each element x, check if `target - x` is already in the map.  
-O(n) time, O(n) space.  
+Hash map: store each value's index as you scan.
+For each element x, check if `target - x` is already in the map.
+O(n) time, O(n) space.
 → `problems/0001-two-sum/`
 ```

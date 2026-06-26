@@ -4,39 +4,27 @@ name: Unit tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
 
-  build:
-    runs-on: self-hosted
-    container:
-      # Runner docker image
-      image: ubuntu:22.04
+  cpp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cpp
     steps:
-      # Checks-out repository under $GITHUB_WORKSPACE, so job can access it
       - uses: actions/checkout@v4
 
-      - name: Install essential packages for C++ development
+      - name: Install conan and cmake
         run: |
-          apt-get update -qq
-          apt-get install -y build-essential
-
-      - name: Install python3
-        shell: bash
-        run: |
+          pip3 install -q --user conan==2.* cmake==3.23.*
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          apt-get install -y python3 python3-pip
-
-      - name: Install conan && cmake
-        run: pip3 install -q --user conan==2.* cmake==3.23.*
 
       - name: Detect default conan profile if not exists
-        shell: bash
-        run: |
-          [ -f "$HOME/.conan2/profiles/default" ] || conan profile detect
+        run: '[ -f "$HOME/.conan2/profiles/default" ] || conan profile detect'
 
       - name: Install dependencies
         run: conan install . --build=missing
@@ -49,3 +37,31 @@ jobs:
 
       - name: Run tests
         run: ctest --preset conan-release --output-on-failure
+
+  rust:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: cargo test
+
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install test dependencies
+        run: pip3 install pytest ruff
+
+      - name: Run tests
+        run: python3 -m pytest
+
+      - name: Lint
+        run: ruff check .
