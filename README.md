@@ -1,57 +1,47 @@
-LeetCode solutions
-===============================
+<!-- Copyright (C) Denys Valchuk - All Rights Reserved
+     ZHZhbGNodWtAZ21haWwuY29tCg== -->
 
-A single Conan + CMake monorepo. Each problem is a self-contained folder under
-`problems/` with its own header-only solution and its own tests/datasets. Adding
-a problem needs **no** build-system edits.
+# algolc
 
-# Layout
+LeetCode solutions in C++, Rust, and Python.
+
+## Layout
+
 ```
-├── CMakeLists.txt          # auto-discovers problems/*
-├── conanfile.py            # Conan package manager file
-├── common/                 # shared header-only helpers (ListNode, ...)
-├── scripts/new_problem.py  # scaffold a new problem folder
-└── problems/
-    └── <id>-<slug>/
-        ├── solution.hpp    # namespace dv::lc { class Solution ... }
-        └── test.cpp        # datasets + GoogleTest cases
+problems/<id>-<slug>/README.md   ← problem statement (shared)
+cpp/      ← C++20 solutions (Conan 2 + CMake + GoogleTest)
+rust/     ← Rust solutions (Cargo workspace, one crate per problem)
+python/   ← Python solutions (pytest + ruff)
+scripts/  ← new_problem.py scaffold tool
+anki/     ← Anki flashcards (yanki format)
 ```
 
-# Dependencies are managed by Conan, install it first
+## Add a new problem
+
 ```bash
-pip install -r requirements.txt
+# C++ only (default):
+python scripts/new_problem.py 0042 trapping-rain-water
+
+# With Rust and/or Python:
+python scripts/new_problem.py 0042 trapping-rain-water --rust --python
 ```
 
-# Build (all problems)
+## Build & test
+
+### C++ (from `cpp/`)
 ```bash
 conan install . --build=missing
 cmake --preset conan-default
-cmake --build --preset conan-debug
+cmake --build --preset conan-release
+ctest --preset conan-release
 ```
 
-# Run tests (all problems)
+### Rust (from `rust/`)
 ```bash
-ctest --preset conan-debug
+cargo test
 ```
 
-# Working on a single problem
-Incremental builds only recompile what you touched. Build and run just one:
+### Python (from `python/`)
 ```bash
-cmake --build --preset conan-debug --target p_0001_two_sum
-ctest --preset conan-debug -R 0001
+python -m pytest
 ```
-
-# Configure only a subset (optional, for cold builds once you have many)
-`LC_ONLY` is a regex matched against problem folder names:
-```bash
-cmake --preset conan-default -DLC_ONLY=0001
-```
-
-# Add a new problem
-```bash
-python scripts/new_problem.py 0042 trapping-rain-water
-```
-
->📝
-> Conventions (layout, formatting, Conan recipe) follow the template
-> https://github.com/edu-one/cpptest
