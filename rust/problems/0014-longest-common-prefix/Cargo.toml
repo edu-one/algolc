@@ -1,0 +1,10 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
+
+[package]
+name = "p0014-longest-common-prefix"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "p0014_longest_common_prefix"

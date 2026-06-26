@@ -1,0 +1,6 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
+
+[workspace]
+resolver = "2"
+members = ["problems/*"]
