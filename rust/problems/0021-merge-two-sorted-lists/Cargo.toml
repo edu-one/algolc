@@ -1,0 +1,10 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
+
+[package]
+name = "p0021-merge-two-sorted-lists"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "p0021_merge_two_sorted_lists"
