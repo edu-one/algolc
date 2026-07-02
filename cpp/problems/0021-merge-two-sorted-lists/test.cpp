@@ -12,30 +12,30 @@
 
 namespace {
 
-    dv::lc::ListNode *make_list(std::initializer_list<int> values) {
-        dv::lc::ListNode head;
-        dv::lc::ListNode *tail = &head;
-        for (int v : values) {
-            tail->next = new dv::lc::ListNode(v);
-            tail = tail->next;
-        }
-        return head.next;
+dv::lc::ListNode *make_list(std::initializer_list<int> values) {
+    dv::lc::ListNode head;
+    dv::lc::ListNode *tail = &head;
+    for (int v : values) {
+        tail->next = new dv::lc::ListNode(v);
+        tail = tail->next;
     }
+    return head.next;
+}
 
-    std::vector<int> to_vector(dv::lc::ListNode *node) {
-        std::vector<int> out;
-        for (; node != nullptr; node = node->next)
-            out.push_back(node->val);
-        return out;
-    }
+std::vector<int> to_vector(dv::lc::ListNode *node) {
+    std::vector<int> out;
+    for (; node != nullptr; node = node->next)
+        out.push_back(node->val);
+    return out;
+}
 
-    void free_list(dv::lc::ListNode *node) {
-        while (node != nullptr) {
-            dv::lc::ListNode *next = node->next;
-            delete node;
-            node = next;
-        }
+void free_list(dv::lc::ListNode *node) {
+    while (node != nullptr) {
+        dv::lc::ListNode *next = node->next;
+        delete node;
+        node = next;
     }
+}
 
 } // namespace
 

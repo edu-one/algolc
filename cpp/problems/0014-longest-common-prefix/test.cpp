@@ -5,6 +5,7 @@
 #include "solution.hpp"
 
 #include <gtest/gtest.h>
+
 #include <string>
 #include <vector>
 
@@ -21,29 +22,19 @@ TEST(LongestCommonPrefix, Example2_NoCommonPrefix) {
 }
 
 // Edge: single string — the whole string is the prefix
-TEST(LongestCommonPrefix, SingleString) {
-    EXPECT_EQ(Solution{}.longestCommonPrefix({"alone"}), "alone");
-}
+TEST(LongestCommonPrefix, SingleString) { EXPECT_EQ(Solution{}.longestCommonPrefix({"alone"}), "alone"); }
 
 // Edge: all strings are identical
-TEST(LongestCommonPrefix, AllIdentical) {
-    EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "abc", "abc"}), "abc");
-}
+TEST(LongestCommonPrefix, AllIdentical) { EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "abc", "abc"}), "abc"); }
 
 // Edge: one empty string in the array — prefix must be ""
-TEST(LongestCommonPrefix, EmptyStringInArray) {
-    EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "", "ab"}), "");
-}
+TEST(LongestCommonPrefix, EmptyStringInArray) { EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "", "ab"}), ""); }
 
 // Edge: all strings are empty
-TEST(LongestCommonPrefix, AllEmpty) {
-    EXPECT_EQ(Solution{}.longestCommonPrefix({"", "", ""}), "");
-}
+TEST(LongestCommonPrefix, AllEmpty) { EXPECT_EQ(Solution{}.longestCommonPrefix({"", "", ""}), ""); }
 
 // Edge: prefix is a single character
-TEST(LongestCommonPrefix, SingleCharPrefix) {
-    EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "axy", "az"}), "a");
-}
+TEST(LongestCommonPrefix, SingleCharPrefix) { EXPECT_EQ(Solution{}.longestCommonPrefix({"abc", "axy", "az"}), "a"); }
 
 // Edge: full prefix match on the shortest string
 TEST(LongestCommonPrefix, PrefixEqualsShortestString) {

@@ -13,43 +13,43 @@
 
 namespace {
 
-    // Build a binary tree from a level-order array (nullopt = missing node).
-    dv::lc::TreeNode *make_tree(std::vector<std::optional<int>> vals) {
-        if (vals.empty() || !vals[0])
-            return nullptr;
+// Build a binary tree from a level-order array (nullopt = missing node).
+dv::lc::TreeNode *make_tree(std::vector<std::optional<int>> vals) {
+    if (vals.empty() || !vals[0])
+        return nullptr;
 
-        auto *root = new dv::lc::TreeNode(*vals[0]);
-        std::queue<dv::lc::TreeNode *> q;
-        q.push(root);
-        std::size_t i = 1;
+    auto *root = new dv::lc::TreeNode(*vals[0]);
+    std::queue<dv::lc::TreeNode *> q;
+    q.push(root);
+    std::size_t i = 1;
 
-        while (!q.empty() && i < vals.size()) {
-            auto *node = q.front();
-            q.pop();
+    while (!q.empty() && i < vals.size()) {
+        auto *node = q.front();
+        q.pop();
 
-            if (i < vals.size() && vals[i]) {
-                node->left = new dv::lc::TreeNode(*vals[i]);
-                q.push(node->left);
-            }
-            ++i;
-
-            if (i < vals.size() && vals[i]) {
-                node->right = new dv::lc::TreeNode(*vals[i]);
-                q.push(node->right);
-            }
-            ++i;
+        if (i < vals.size() && vals[i]) {
+            node->left = new dv::lc::TreeNode(*vals[i]);
+            q.push(node->left);
         }
+        ++i;
 
-        return root;
+        if (i < vals.size() && vals[i]) {
+            node->right = new dv::lc::TreeNode(*vals[i]);
+            q.push(node->right);
+        }
+        ++i;
     }
 
-    void free_tree(dv::lc::TreeNode *node) {
-        if (!node)
-            return;
-        free_tree(node->left);
-        free_tree(node->right);
-        delete node;
-    }
+    return root;
+}
+
+void free_tree(dv::lc::TreeNode *node) {
+    if (!node)
+        return;
+    free_tree(node->left);
+    free_tree(node->right);
+    delete node;
+}
 
 } // namespace
 
@@ -65,8 +65,7 @@ TEST(BinaryTreeInorderTraversal, Example1) {
 
 TEST(BinaryTreeInorderTraversal, Example2) {
     // [1,2,3,4,5,null,8,null,null,6,7,9] -> [4,2,6,5,7,1,3,9,8]
-    auto *root = make_tree({1, 2, 3, 4, 5, std::nullopt, 8,
-                            std::nullopt, std::nullopt, 6, 7, 9});
+    auto *root = make_tree({1, 2, 3, 4, 5, std::nullopt, 8, std::nullopt, std::nullopt, 6, 7, 9});
     dv::lc::Solution s;
     EXPECT_EQ((std::vector<int>{4, 2, 6, 5, 7, 1, 3, 9, 8}), s.inorderTraversal(root));
     free_tree(root);

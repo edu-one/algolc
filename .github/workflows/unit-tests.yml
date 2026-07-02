@@ -23,6 +23,9 @@ jobs:
           pip3 install -q --user conan==2.* cmake==3.23.*
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
+      - name: Check formatting
+        run: find common problems -name "*.hpp" -o -name "*.cpp" | xargs clang-format --dry-run --Werror
+
       - name: Detect default conan profile if not exists
         run: '[ -f "$HOME/.conan2/profiles/default" ] || conan profile detect'
 
