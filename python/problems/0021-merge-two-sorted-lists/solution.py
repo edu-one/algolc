@@ -11,8 +11,9 @@ class ListNode:
 
 
 class Solution:
-    
-    def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+    def mergeTwoLists(
+        self, list1: ListNode | None, list2: ListNode | None
+    ) -> ListNode | None:
         dummy = ListNode()
         rit = dummy
         while list1 and list2:

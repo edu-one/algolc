@@ -25,7 +25,8 @@ s = Solution()
 
 
 def test_example1():
-    assert to_list(s.mergeTwoLists(make_list([1, 2, 4]), make_list([1, 3, 4]))) == [1, 1, 2, 3, 4, 4]
+    result = to_list(s.mergeTwoLists(make_list([1, 2, 4]), make_list([1, 3, 4])))
+    assert result == [1, 1, 2, 3, 4, 4]
 
 
 def test_example2_both_empty():
@@ -45,4 +46,5 @@ def test_single_elements():
 
 
 def test_all_same():
-    assert to_list(s.mergeTwoLists(make_list([1, 1]), make_list([1, 1]))) == [1, 1, 1, 1]
+    result = to_list(s.mergeTwoLists(make_list([1, 1]), make_list([1, 1])))
+    assert result == [1, 1, 1, 1]
