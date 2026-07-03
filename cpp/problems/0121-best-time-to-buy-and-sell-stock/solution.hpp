@@ -16,12 +16,12 @@ public:
     int maxProfit(const std::vector<int> &prices) {
         int profit = 0;
         int min = std::numeric_limits<int>::max();
-        for (size_t i = 0; i < prices.size(); ++i) {
-            if (min > prices[i]) {
-                min = prices[i];
+        for (const auto p : prices) {
+            if (min > p) {
+                min = p;
                 continue;
             }
-            auto diff = prices[i] - min;
+            const auto diff = p - min;
             profit = std::max(profit, diff);
         }
         return profit;
