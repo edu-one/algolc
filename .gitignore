@@ -1,12 +1,14 @@
 .idea/
 .obsidian/
-.vs/
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
-build/
-CMakeUserPresets.json
 .claude/
+
+# C++
+cpp/build/
+CMakeUserPresets.json
+.vs/
 
 # Rust build artifacts
 rust/target/
