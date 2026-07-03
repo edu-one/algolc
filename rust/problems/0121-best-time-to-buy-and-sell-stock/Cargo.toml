@@ -1,0 +1,10 @@
+# Copyright (C) Denys Valchuk - All Rights Reserved
+# ZHZhbGNodWtAZ21haWwuY29tCg==
+
+[package]
+name = "p0121-best-time-to-buy-and-sell-stock"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "p0121_best_time_to_buy_and_sell_stock"
