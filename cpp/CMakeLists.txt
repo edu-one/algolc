@@ -8,6 +8,13 @@ project(algolc VERSION 0.0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Conan provides dependencies only for Debug and Release; drop the
+# remaining default VS configs so generation stays clean.
+get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(is_multi_config)
+  set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+endif()
+
 option(WITH_TESTS "build tests?" ON)
 set(LC_ONLY "" CACHE STRING "Regex to restrict configured problems (e.g. 0001)")
 

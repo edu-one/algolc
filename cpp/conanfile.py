@@ -29,7 +29,6 @@ class AlgoConan(ConanFile):
         deps.generate()
         tc = CMakeToolchain(self)
         tc.variables["WITH_TESTS"] = bool(self.options.with_tests)
-        tc.variables["CMAKE_BUILD_TYPE"] = "%s" % self.settings.build_type
         tc.generate()
 
     def requirements(self):
