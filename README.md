@@ -33,7 +33,7 @@ python scripts/new_problem.py 0042 trapping-rain-water --rust --python
 # Install Conan + CMake (once):
 pip install -r requirements.txt
 
-conan install . --build=missing
+conan install . -s build_type=Release --build=missing
 cmake --preset conan-default
 cmake --build --preset conan-release
 ctest --preset conan-release

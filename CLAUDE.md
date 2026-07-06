@@ -109,7 +109,7 @@ Each problem directory contains a `conftest.py` that ensures the local `solution
 ### C++ (run from `cpp/`)
 ```bash
 # Install dependencies (once, or after conanfile.py changes)
-conan install . --build=missing
+conan install . -s build_type=Release --build=missing
 
 # Configure CMake (re-run whenever a new problem folder appears)
 cmake --preset conan-default
