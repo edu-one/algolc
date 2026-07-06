@@ -9,8 +9,8 @@ Blind 75 core plus high-value bonuses (marked *bonus*). Checked = solved in this
 
 - [x] 0001 two-sum
 - [x] 0014 longest-common-prefix *(bonus)*
-- [ ] 0217 contains-duplicate
-- [ ] 0242 valid-anagram
+- [x] 0217 contains-duplicate
+- [x] 0242 valid-anagram
 - [ ] 0049 group-anagrams
 - [ ] 0347 top-k-frequent-elements
 - [ ] 0238 product-of-array-except-self
