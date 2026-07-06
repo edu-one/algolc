@@ -18,4 +18,4 @@ rit = &mut rit.as_mut().unwrap().next; // advance to the new tail slot
 - `.as_mut()` turns `&mut Option<T>` into `Option<&mut T>` so you can reach `.next`.
 - No dangling pointers: each step hands the borrow forward down the list.
 
-→ `problems/0021-merge-two-sorted-lists/`
+→ `problems/0021-merge-two-sorted-lists.md`

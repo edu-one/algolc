@@ -21,4 +21,4 @@ while (node || !stack.empty()) {
 ```
 
 O(n) time, O(h) space (h = tree height).
-→ `problems/0094-binary-tree-inorder-traversal/`
+→ `problems/0094-binary-tree-inorder-traversal.md`

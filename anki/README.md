@@ -38,7 +38,7 @@ Front question or prompt
 ---
 
 Back answer. Can include code blocks, bullets, etc.
-Link back to the problem: → `problems/0001-two-sum/`
+Link back to the problem: → `problems/0001-two-sum.md`
 ```
 
 Reversible (both directions):

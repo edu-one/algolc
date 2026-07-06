@@ -15,4 +15,4 @@ list1 = node.next.take();             // detach node.next, advance list1
 
 You can't move out of a value you only have a `&mut` to (it would leave a hole). `take()` is the safe swap that lets you take ownership through a mutable borrow.
 
-→ `problems/0021-merge-two-sorted-lists/`
+→ `problems/0021-merge-two-sorted-lists.md`

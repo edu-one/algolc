@@ -14,4 +14,4 @@ Folds **right-to-left**, wrapping each value around the accumulated tail:
 
 Result: nodes end up in original order because we prepend while walking backwards. A concise, allocation-per-node way to turn `&[i32]` into `Option<Box<ListNode>>`.
 
-→ `problems/0021-merge-two-sorted-lists/`
+→ `problems/0021-merge-two-sorted-lists.md`

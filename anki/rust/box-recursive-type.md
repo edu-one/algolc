@@ -19,4 +19,4 @@ pub struct ListNode {
 
 `Option` gives the null terminator; `Box` breaks the size recursion.
 
-→ `problems/0021-merge-two-sorted-lists/`
+→ `problems/0021-merge-two-sorted-lists.md`

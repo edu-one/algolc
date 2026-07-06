@@ -8,7 +8,7 @@ LeetCode solutions in C++, Rust, and Python.
 ## Layout
 
 ```
-problems/<id>-<slug>/README.md   ← problem statement (shared)
+problems/<id>-<slug>.md   ← problem statement (shared)
 cpp/      ← C++20 solutions (Conan 2 + CMake + GoogleTest)
 rust/     ← Rust solutions (Cargo workspace, one crate per problem)
 python/   ← Python solutions (pytest + ruff)

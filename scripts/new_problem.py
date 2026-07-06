@@ -1,7 +1,7 @@
 # Copyright (C) Denys Valchuk - All Rights Reserved
 # ZHZhbGNodWtAZ21haWwuY29tCg==
 
-"""Scaffold a new LeetCode problem folder under problems/<id>-<slug>/."""
+"""Scaffold a new LeetCode problem; shared statement at problems/<id>-<slug>.md."""
 
 import argparse
 import re
@@ -200,21 +200,21 @@ def main():
     # Resolve slug — required for new problems, optional for existing ones
     slug = args.slug
     if slug is None:
-        matches = sorted((root / "problems").glob(f"{pid}-*"))
+        matches = sorted((root / "problems").glob(f"{pid}-*.md"))
         if len(matches) == 0:
             print(
-                f"error: no problems/{pid}-* directory found; provide slug as second argument",
+                f"error: no problems/{pid}-*.md file found; provide slug as second argument",
                 file=sys.stderr,
             )
             return 2
         elif len(matches) > 1:
             names = ", ".join(m.name for m in matches)
             print(
-                f"error: ambiguous — multiple directories match {pid}-*: {names}",
+                f"error: ambiguous — multiple files match {pid}-*.md: {names}",
                 file=sys.stderr,
             )
             return 2
-        slug = matches[0].name[len(pid) + 1:]
+        slug = matches[0].stem[len(pid) + 1:]
     else:
         if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
             print(
@@ -231,7 +231,7 @@ def main():
 
     # README (shared, always created alongside the first language)
     write_file(
-        root / "problems" / f"{pid}-{slug}" / "README.md",
+        root / "problems" / f"{pid}-{slug}.md",
         root,
         README_TMPL.format(id=pid, slug=slug, title=title),
     )

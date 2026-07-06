@@ -7,7 +7,7 @@
 
 ```
 algolc/
-  problems/<id>-<slug>/README.md   ← shared problem statement (browsable reference)
+  problems/<id>-<slug>.md          ← shared problem statement (browsable reference)
   cpp/
     CMakeLists.txt  conanfile.py  .clang-format  .cmake-format
     common/include/dv/lc.hpp
@@ -167,7 +167,7 @@ When the user says "set up problem N" or equivalent:
    ```
    For C++: also run `cd cpp && cmake --preset conan-default` to pick up the new folder.
 
-3. **Write `problems/<id>-<slug>/README.md`** — the browsable GitHub reference:
+3. **Write `problems/<id>-<slug>.md`** — the browsable GitHub reference:
    - Title + LeetCode URL
    - Difficulty (`Easy` / `Medium` / `Hard`)
    - Topics/tags (e.g., `Array`, `Hash Table`, `Two Pointers`)
@@ -245,5 +245,5 @@ Two-sum complement lookup — what data structure and why?
 Hash map: store each value's index as you scan.
 For each element x, check if `target - x` is already in the map.
 O(n) time, O(n) space.
-→ `problems/0001-two-sum/`
+→ `problems/0001-two-sum.md`
 ```
