@@ -5,6 +5,7 @@
 #ifndef DV_LC_0217_CONTAINS_DUPLICATE_HPP
 #define DV_LC_0217_CONTAINS_DUPLICATE_HPP
 
+#include <unordered_set>
 #include <vector>
 
 namespace dv::lc {
@@ -12,8 +13,11 @@ namespace dv::lc {
 class Solution {
 public:
     bool containsDuplicate(std::vector<int> &nums) {
-        // TODO: solve 0217 - contains-duplicate
-        (void)nums;
+        std::unordered_set<int> visited;
+        for (const auto &n : nums) {
+            if (!visited.insert(n).second)
+                return true;
+        }
         return false;
     }
 };
