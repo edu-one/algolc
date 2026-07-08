@@ -109,7 +109,10 @@ Each problem directory contains a `conftest.py` that ensures the local `solution
 ### C++ (run from `cpp/`)
 ```bash
 # Install dependencies (once, or after conanfile.py changes)
+# The generator (Visual Studio) is multi-config, but Conan still needs a
+# separate install per build_type to populate both Debug and Release package data.
 conan install . -s build_type=Release --build=missing
+conan install . -s build_type=Debug --build=missing
 
 # Configure CMake (re-run whenever a new problem folder appears)
 cmake --preset conan-default
@@ -117,6 +120,10 @@ cmake --preset conan-default
 # Build + test a single problem
 cmake --build --preset conan-release --target p_<id>_<slug>
 ctest --preset conan-release -R <id>
+
+# Debug config (same build tree, for local debugging)
+cmake --build --preset conan-debug --target p_<id>_<slug>
+ctest --preset conan-debug -R <id>
 
 # Build + test everything
 cmake --build --preset conan-release
