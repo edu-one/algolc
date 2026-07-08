@@ -3,3 +3,4 @@
 conan>=2,<3
 cmake>=3.23
 clang-format==18.1.8
+cmakelang==0.6.13
