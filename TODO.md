@@ -11,8 +11,8 @@ Blind 75 core plus high-value bonuses (marked *bonus*). Checked = solved in this
 - [x] 0014 longest-common-prefix *(bonus)*
 - [x] 0217 contains-duplicate
 - [x] 0242 valid-anagram
-- [ ] 0049 group-anagrams
-- [ ] 0347 top-k-frequent-elements
+- [x] 0049 group-anagrams
+- [x] 0347 top-k-frequent-elements
 - [ ] 0238 product-of-array-except-self
 - [ ] 0128 longest-consecutive-sequence
 - [ ] 0271 encode-and-decode-strings
@@ -27,7 +27,7 @@ Blind 75 core plus high-value bonuses (marked *bonus*). Checked = solved in this
 ## Sliding Window
 
 - [x] 0121 best-time-to-buy-and-sell-stock
-- [ ] 0003 longest-substring-without-repeating-characters
+- [x] 0003 longest-substring-without-repeating-characters
 - [ ] 0424 longest-repeating-character-replacement
 - [ ] 0076 minimum-window-substring
 
