@@ -3,7 +3,11 @@
 
 cmake_minimum_required(VERSION 3.23)
 
-project(algolc VERSION 0.0.1 LANGUAGES CXX)
+project(
+  algolc
+  VERSION 0.0.1
+  LANGUAGES CXX
+)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,8 +33,11 @@ if(WITH_TESTS)
   find_package(GTest REQUIRED)
   include(GoogleTest)
 
-  file(GLOB problem_dirs RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/problems
-       ${CMAKE_CURRENT_SOURCE_DIR}/problems/*)
+  file(
+    GLOB problem_dirs
+    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/problems
+    ${CMAKE_CURRENT_SOURCE_DIR}/problems/*
+  )
   list(SORT problem_dirs)
 
   foreach(dir IN LISTS problem_dirs)
