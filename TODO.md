@@ -14,7 +14,7 @@ Blind 75 core plus high-value bonuses (marked *bonus*). Checked = solved in this
 - [x] 0049 group-anagrams
 - [x] 0347 top-k-frequent-elements
 - [x] 0238 product-of-array-except-self
-- [ ] 0128 longest-consecutive-sequence
+- [x] 0128 longest-consecutive-sequence
 - [ ] 0271 encode-and-decode-strings
 
 ## Two Pointers
