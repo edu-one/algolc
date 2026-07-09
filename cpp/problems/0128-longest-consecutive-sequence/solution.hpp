@@ -16,7 +16,7 @@ public:
     int longestConsecutive(const std::vector<int> &nums) {
         int maxRange = 0;
         std::unordered_set<int> presence(nums.begin(), nums.end());
-        for (int n : nums) {
+        for (int n : presence) {
             if (presence.contains(n + 1))
                 continue;
             int range = 0;
